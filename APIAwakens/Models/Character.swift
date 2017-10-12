@@ -1,5 +1,5 @@
 //
-//  People.swift
+//  Character.swift
 //  APIAwakens
 //
 //  Created by Khalid Alrashed on 10/3/17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class People {
+class Character {
     let name: String
     let birthYear: String
     let homeworld: String

@@ -9,9 +9,9 @@
 import Foundation
 
 struct Stub {
-    static var people: [People] {
-        let lukeSkywalker = People(name: "Luke Skywalker", birthYear: "19BBY", homeworld: "Tatooine", height: "1.72m", eyeColor: "Blue", hairColor: "Blond")
-        let darthVader = People(name: "Darth Vadaer", birthYear: "41.9BBY", homeworld: "Tatooine", height: "2.02m", eyeColor: "Yellow", hairColor: "none")
+    static var characters: [Character] {
+        let lukeSkywalker = Character(name: "Luke Skywalker", birthYear: "19BBY", homeworld: "Tatooine", height: "1.72m", eyeColor: "Blue", hairColor: "Blond")
+        let darthVader = Character(name: "Darth Vadaer", birthYear: "41.9BBY", homeworld: "Tatooine", height: "2.02m", eyeColor: "Yellow", hairColor: "none")
         
         return [lukeSkywalker, darthVader]
     }
