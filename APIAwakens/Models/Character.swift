@@ -11,7 +11,7 @@ import Foundation
 class Character: Entity {
     
     var type: EntityType {
-        return .character
+        return .Characters
     }
     
     let name: String

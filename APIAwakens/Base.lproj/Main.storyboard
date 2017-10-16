@@ -4,7 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -191,12 +191,13 @@
                                             <color key="backgroundColor" red="0.1074544415" green="0.1258107722" blue="0.14154082539999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstItem="fiN-CC-DEu" firstAttribute="centerY" secondItem="qvK-gX-bAH" secondAttribute="centerY" id="2NM-hG-Veu"/>
+                                                <constraint firstItem="CLs-eQ-s3Z" firstAttribute="leading" secondItem="qvK-gX-bAH" secondAttribute="leading" constant="100" id="3Gc-n8-hYE"/>
                                                 <constraint firstItem="fiN-CC-DEu" firstAttribute="leading" secondItem="qvK-gX-bAH" secondAttribute="leading" constant="15" id="BTv-Ry-zm8"/>
                                                 <constraint firstItem="F83-LW-3GI" firstAttribute="centerY" secondItem="qvK-gX-bAH" secondAttribute="centerY" id="Kka-we-wdj"/>
                                                 <constraint firstItem="JLv-97-0k3" firstAttribute="centerY" secondItem="qvK-gX-bAH" secondAttribute="centerY" id="MT2-QA-OH3"/>
                                                 <constraint firstAttribute="trailing" secondItem="F83-LW-3GI" secondAttribute="trailing" constant="15" id="dkj-qE-YDY"/>
                                                 <constraint firstItem="F83-LW-3GI" firstAttribute="leading" secondItem="JLv-97-0k3" secondAttribute="trailing" constant="8" id="gNX-lf-qlC"/>
-                                                <constraint firstItem="CLs-eQ-s3Z" firstAttribute="leading" secondItem="fiN-CC-DEu" secondAttribute="trailing" constant="50" id="mRf-ev-Ekc"/>
+                                                <constraint firstItem="CLs-eQ-s3Z" firstAttribute="leading" relation="lessThanOrEqual" secondItem="fiN-CC-DEu" secondAttribute="trailing" constant="50" id="mRf-ev-Ekc"/>
                                                 <constraint firstItem="CLs-eQ-s3Z" firstAttribute="centerY" secondItem="qvK-gX-bAH" secondAttribute="centerY" id="zxV-9Y-q1k"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -316,6 +317,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Characters" id="5v9-w5-TAw"/>
                     <connections>
+                        <outlet property="nameLabel" destination="koE-2K-0v0" id="AYp-A6-2lW"/>
+                        <outlet property="pickerView" destination="yKP-Hv-6ew" id="Afi-Ud-oyt"/>
                         <outlet property="tableView" destination="Ozs-mF-odc" id="4a0-FY-Res"/>
                     </connections>
                 </viewController>

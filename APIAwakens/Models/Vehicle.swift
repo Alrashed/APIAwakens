@@ -11,7 +11,7 @@ import Foundation
 class Vehicle: Entity {
     
     var type: EntityType {
-        return .vehicle
+        return .Vehicles
     }
     
     let name: String

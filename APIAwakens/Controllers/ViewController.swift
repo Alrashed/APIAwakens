@@ -9,10 +9,15 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    struct SegueIdentifiers {
+        static let showCharacters = "showCharacters"
+        static let showVehicles = "showVehicles"
+        static let showStarships = "showStarships"
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -24,5 +29,18 @@ class ViewController: UIViewController {
         super.viewWillDisappear(true)
         navigationController?.setNavigationBarHidden(false, animated: false)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let detailViewController = segue.destination as! DetailViewController
+        
+        if segue.identifier == SegueIdentifiers.showCharacters {
+            detailViewController.entityItems = Stub.characters
+            
+        } else if segue.identifier == SegueIdentifiers.showVehicles {
+            detailViewController.entityItems = Stub.vehicles
+            
+        } else if segue.identifier == SegueIdentifiers.showStarships {
+            detailViewController.entityItems = Stub.starships
+        }
+    }
 }
-

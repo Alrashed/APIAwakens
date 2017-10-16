@@ -11,7 +11,7 @@ import Foundation
 class Starship: Entity {
     
     var type: EntityType {
-        return .starship
+        return .Starships
     }
     
     let name: String

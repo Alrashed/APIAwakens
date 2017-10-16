@@ -8,10 +8,10 @@
 
 import Foundation
 
-enum EntityType {
-    case character
-    case vehicle
-    case starship
+enum EntityType: String {
+    case Characters
+    case Vehicles
+    case Starships
 }
 
 protocol Entity {
