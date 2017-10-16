@@ -18,6 +18,7 @@
 		E95C7EAF1F843F1800954620 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C7EAE1F843F1800954620 /* Vehicle.swift */; };
 		E95C7EB11F843FBE00954620 /* Starship.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C7EB01F843FBE00954620 /* Starship.swift */; };
 		E9FF6EC71F8F10AD000FA6FA /* Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FF6EC61F8F10AD000FA6FA /* Stub.swift */; };
+		E9FF6EC91F92DDDB000FA6FA /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FF6EC81F92DDDB000FA6FA /* Entity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		E95C7EAE1F843F1800954620 /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
 		E95C7EB01F843FBE00954620 /* Starship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Starship.swift; sourceTree = "<group>"; };
 		E9FF6EC61F8F10AD000FA6FA /* Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stub.swift; sourceTree = "<group>"; };
+		E9FF6EC81F92DDDB000FA6FA /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 		E95C7EA91F843E0500954620 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E9FF6EC81F92DDDB000FA6FA /* Entity.swift */,
 				E95C7EAC1F843E4200954620 /* Character.swift */,
 				E95C7EAE1F843F1800954620 /* Vehicle.swift */,
 				E95C7EB01F843FBE00954620 /* Starship.swift */,
@@ -183,6 +186,7 @@
 				E95C7E9A1F82E84400954620 /* ViewController.swift in Sources */,
 				E9FF6EC71F8F10AD000FA6FA /* Stub.swift in Sources */,
 				E905B0841F88339500C2B512 /* DetailViewController.swift in Sources */,
+				E9FF6EC91F92DDDB000FA6FA /* Entity.swift in Sources */,
 				E95C7EAD1F843E4200954620 /* Character.swift in Sources */,
 				E95C7E981F82E84400954620 /* AppDelegate.swift in Sources */,
 				E905B0861F883B2000C2B512 /* InfoCell.swift in Sources */,
