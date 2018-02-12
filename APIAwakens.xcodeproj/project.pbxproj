@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E905B0841F88339500C2B512 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E905B0831F88339500C2B512 /* DetailViewController.swift */; };
 		E905B0861F883B2000C2B512 /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E905B0851F883B2000C2B512 /* InfoCell.swift */; };
+		E95565AF1F956BDC00D8436E /* ConversionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95565AE1F956BDC00D8436E /* ConversionCell.swift */; };
 		E95C7E981F82E84400954620 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C7E971F82E84400954620 /* AppDelegate.swift */; };
 		E95C7E9A1F82E84400954620 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C7E991F82E84400954620 /* ViewController.swift */; };
 		E95C7E9D1F82E84400954620 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E95C7E9B1F82E84400954620 /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 		E95C7EAD1F843E4200954620 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C7EAC1F843E4200954620 /* Character.swift */; };
 		E95C7EAF1F843F1800954620 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C7EAE1F843F1800954620 /* Vehicle.swift */; };
 		E95C7EB11F843FBE00954620 /* Starship.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C7EB01F843FBE00954620 /* Starship.swift */; };
+		E9D3B64B2031FDEB00C51769 /* UITextField+AddDoneCancelToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D3B64A2031FDEB00C51769 /* UITextField+AddDoneCancelToolBar.swift */; };
 		E9FF6EC71F8F10AD000FA6FA /* Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FF6EC61F8F10AD000FA6FA /* Stub.swift */; };
 		E9FF6EC91F92DDDB000FA6FA /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FF6EC81F92DDDB000FA6FA /* Entity.swift */; };
 /* End PBXBuildFile section */
@@ -24,6 +26,7 @@
 /* Begin PBXFileReference section */
 		E905B0831F88339500C2B512 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		E905B0851F883B2000C2B512 /* InfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
+		E95565AE1F956BDC00D8436E /* ConversionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionCell.swift; sourceTree = "<group>"; };
 		E95C7E941F82E84400954620 /* APIAwakens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = APIAwakens.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E95C7E971F82E84400954620 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E95C7E991F82E84400954620 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -34,6 +37,7 @@
 		E95C7EAC1F843E4200954620 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		E95C7EAE1F843F1800954620 /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
 		E95C7EB01F843FBE00954620 /* Starship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Starship.swift; sourceTree = "<group>"; };
+		E9D3B64A2031FDEB00C51769 /* UITextField+AddDoneCancelToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+AddDoneCancelToolBar.swift"; sourceTree = "<group>"; };
 		E9FF6EC61F8F10AD000FA6FA /* Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stub.swift; sourceTree = "<group>"; };
 		E9FF6EC81F92DDDB000FA6FA /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -49,6 +53,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E9574AC91FA2F16700C9647F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E9D3B64A2031FDEB00C51769 /* UITextField+AddDoneCancelToolBar.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		E95C7E8B1F82E84400954620 = {
 			isa = PBXGroup;
 			children = (
@@ -68,6 +80,7 @@
 		E95C7E961F82E84400954620 /* APIAwakens */ = {
 			isa = PBXGroup;
 			children = (
+				E9574AC91FA2F16700C9647F /* Extensions */,
 				E95C7EAB1F843E1200954620 /* Controllers */,
 				E95C7EAA1F843E0B00954620 /* Views */,
 				E95C7EA91F843E0500954620 /* Models */,
@@ -96,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				E905B0851F883B2000C2B512 /* InfoCell.swift */,
+				E95565AE1F956BDC00D8436E /* ConversionCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -183,6 +197,7 @@
 			files = (
 				E95C7EAF1F843F1800954620 /* Vehicle.swift in Sources */,
 				E95C7EB11F843FBE00954620 /* Starship.swift in Sources */,
+				E9D3B64B2031FDEB00C51769 /* UITextField+AddDoneCancelToolBar.swift in Sources */,
 				E95C7E9A1F82E84400954620 /* ViewController.swift in Sources */,
 				E9FF6EC71F8F10AD000FA6FA /* Stub.swift in Sources */,
 				E905B0841F88339500C2B512 /* DetailViewController.swift in Sources */,
@@ -190,6 +205,7 @@
 				E95C7EAD1F843E4200954620 /* Character.swift in Sources */,
 				E95C7E981F82E84400954620 /* AppDelegate.swift in Sources */,
 				E905B0861F883B2000C2B512 /* InfoCell.swift in Sources */,
+				E95565AF1F956BDC00D8436E /* ConversionCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
