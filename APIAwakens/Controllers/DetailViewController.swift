@@ -8,14 +8,18 @@
 
 import UIKit
 
-class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+
+
+class DetailViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var nameLabel: UILabel!
     
-    var selectedPickerRow: Int = 0
     var entityItems: [Entity]?
     
+    var selectedPickerRow: Int = 0
+    var exchangeRate: Double = 1.0
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,6 +29,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.dataSource = self
         tableView.delegate = self
         
+        tableView.isScrollEnabled = false
         tableView.tableFooterView = UIView()
         self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
         
@@ -33,16 +38,18 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             self.title = entityItems[selectedPickerRow].type.rawValue
         }
     }
-    
-    // MARK: - Table View Data Source
-    
+}
+
+// MARK: - Table View Data Source
+
+extension DetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let entityItemsCount = entityItems?[section].rowCount else { fatalError() }
         return entityItemsCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: InfoCell.identifier, for: indexPath) as? InfoCell, let entityItems = entityItems else { fatalError() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: InfoCell.identifier, for: indexPath) as? InfoCell, let entityItems = entityItems else { return UITableViewCell() }
         
         let item = entityItems[selectedPickerRow]
         
@@ -57,12 +64,15 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
                     cell.keyLabel.text = Character.Keys.homeworld.description
                     cell.valueLabel.text = item.homeworld
                 case 2:
-                    cell.keyLabel.text = Character.Keys.height.description
-                    cell.valueLabel.text = item.height
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: ConversionCell.identifier) as? ConversionCell else { return UITableViewCell() }
+                    return cell
                 case 3:
+                    cell.keyLabel.text = Character.Keys.height.description
+                    cell.length = item.height
+                case 4:
                     cell.keyLabel.text = Character.Keys.eye_color.description
                     cell.valueLabel.text = item.eyeColor
-                case 4:
+                case 5:
                     cell.keyLabel.text = Character.Keys.hair_color.description
                     cell.valueLabel.text = item.hairColor
                 default: break
@@ -77,14 +87,18 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
                     cell.valueLabel.text = item.manufacturer
                 case 1:
                     cell.keyLabel.text = Vehicle.Keys.cost_in_credits.description
-                    cell.valueLabel.text = item.costInCredits
+                    cell.cost = item.costInCredits
+                    cell.exchangeRate = exchangeRate
                 case 2:
-                    cell.keyLabel.text = Vehicle.Keys.length.description
-                    cell.valueLabel.text = item.length
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: ConversionCell.identifier) as? ConversionCell else { return UITableViewCell() }
+                    return cell
                 case 3:
+                    cell.keyLabel.text = Vehicle.Keys.length.description
+                    cell.length = item.length
+                case 4:
                     cell.keyLabel.text = Vehicle.Keys.vehicle_class.description
                     cell.valueLabel.text = item.vehicleClass
-                case 4:
+                case 5:
                     cell.keyLabel.text = Vehicle.Keys.crew.description
                     cell.valueLabel.text = item.crew
                 default: break
@@ -99,26 +113,37 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
                     cell.valueLabel.text = item.manufacturer
                 case 1:
                     cell.keyLabel.text = Starship.Keys.cost_in_credits.description
-                    cell.valueLabel.text = item.costInCredits
+                    cell.cost = item.costInCredits
+                    cell.exchangeRate = exchangeRate
                 case 2:
-                    cell.keyLabel.text = Starship.Keys.length.description
-                    cell.valueLabel.text = item.length
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: ConversionCell.identifier) as? ConversionCell else { return UITableViewCell() }
+                    return cell
                 case 3:
+                    cell.keyLabel.text = Starship.Keys.length.description
+                    cell.length = item.length
+                case 4:
                     cell.keyLabel.text = Starship.Keys.starship_class.description
                     cell.valueLabel.text = item.starshipClass
-                case 4:
+                case 5:
                     cell.keyLabel.text = Starship.Keys.crew.description
                     cell.valueLabel.text = item.crew
                 default: break
                 }
             }
         }
-        
         return cell
     }
-    
-    // MARK: - Picker View Data Source
-    
+}
+
+// MARK: - Table View Delegate
+
+extension DetailViewController: UITableViewDelegate {
+
+}
+
+// MARK: - Picker View Data Source
+
+extension DetailViewController: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -127,19 +152,19 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         guard let entityItems = entityItems else { fatalError() }
         return entityItems.count
     }
-    
-    // MARK: - Picker View Delegate
-    
+}
+
+// MARK: - Picker View Delegate
+
+extension DetailViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         guard let entityItems = entityItems else { fatalError() }
-        
         return entityItems[row].name
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedPickerRow = row
         nameLabel.text = entityItems![selectedPickerRow].name
-        
         tableView.reloadData()
     }
 }
