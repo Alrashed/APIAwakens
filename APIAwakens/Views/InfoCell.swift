@@ -8,11 +8,15 @@
 
 import UIKit
 
+typealias ButtonHandler = (InfoCell, UIButton) -> Void
+
 class InfoCell:  UITableViewCell {
     @IBOutlet weak var keyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var leftConversionButton: UIButton!
     @IBOutlet weak var rightConversionButton: UIButton!
+    
+    var conversionButtonHanlder: ButtonHandler?
     
     var length: String?
     var cost: String?
@@ -61,6 +65,7 @@ class InfoCell:  UITableViewCell {
             }
             else if sender.currentTitle == "USD", let cost = cost, let exchangeRate = exchangeRate {
                 valueLabel.text = convertCreditsToUSD(credits: cost, exchangeRate: exchangeRate)
+                conversionButtonHanlder?(self, sender)
             }
         }
     }
@@ -75,6 +80,7 @@ class InfoCell:  UITableViewCell {
             }
             else if sender.currentTitle == "Credits", let cost = cost {
                 valueLabel.text = cost
+                conversionButtonHanlder?(self, sender)
             }
         }
     }

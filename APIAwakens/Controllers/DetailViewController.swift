@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 class DetailViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var pickerView: UIPickerView!
@@ -17,6 +15,7 @@ class DetailViewController: UIViewController {
     
     var entityItems: [Entity]?
     
+    var isConversionCellHidden = true
     var selectedPickerRow: Int = 0
     var exchangeRate: Double = 1.0
         
@@ -36,6 +35,40 @@ class DetailViewController: UIViewController {
         if let entityItems = entityItems {
             nameLabel.text = entityItems[selectedPickerRow].name
             self.title = entityItems[selectedPickerRow].type.rawValue
+        }
+    }
+    
+    func showConversionCell() {
+        if isConversionCellHidden {
+            isConversionCellHidden = false
+        }
+        
+        guard let conversionCell = tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as? ConversionCell else { fatalError() }
+        conversionCell.textField.becomeFirstResponder()
+        
+        tableView.beginUpdates()
+        tableView.endUpdates()
+    }
+    
+    @objc func hideConverionCell() {
+        isConversionCellHidden = true
+        
+        tableView.beginUpdates()
+        tableView.endUpdates()
+    }
+    
+    func conversionButtonTapHandler() -> ButtonHandler {
+        return { [unowned self] cell, button in
+            if self.isConversionCellHidden {
+                if button == cell.leftConversionButton {
+                    self.showConversionCell()
+                }
+            } else {
+                if button == cell.rightConversionButton {
+                    self.view.endEditing(true)
+                    self.hideConverionCell()
+                }
+            }
         }
     }
 }
@@ -89,6 +122,7 @@ extension DetailViewController: UITableViewDataSource {
                     cell.keyLabel.text = Vehicle.Keys.cost_in_credits.description
                     cell.cost = item.costInCredits
                     cell.exchangeRate = exchangeRate
+                    cell.conversionButtonHanlder = conversionButtonTapHandler()
                 case 2:
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: ConversionCell.identifier) as? ConversionCell else { return UITableViewCell() }
                     return cell
@@ -115,6 +149,7 @@ extension DetailViewController: UITableViewDataSource {
                     cell.keyLabel.text = Starship.Keys.cost_in_credits.description
                     cell.cost = item.costInCredits
                     cell.exchangeRate = exchangeRate
+                    cell.conversionButtonHanlder = conversionButtonTapHandler()
                 case 2:
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: ConversionCell.identifier) as? ConversionCell else { return UITableViewCell() }
                     return cell
@@ -138,7 +173,15 @@ extension DetailViewController: UITableViewDataSource {
 // MARK: - Table View Delegate
 
 extension DetailViewController: UITableViewDelegate {
-
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        var rowHeight: CGFloat = 38.0
+        
+        if indexPath.row == 2 && isConversionCellHidden {
+            rowHeight = 0.0
+        }
+        
+        return rowHeight
+    }
 }
 
 // MARK: - Picker View Data Source
