@@ -22,6 +22,6 @@ protocol Entity {
 
 extension Entity {
     var rowCount: Int {
-        return 5
+        return 6
     }
 }
