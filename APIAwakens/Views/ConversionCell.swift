@@ -8,8 +8,15 @@
 
 import UIKit
 
+protocol ExchangeRateDelegate: class {
+    var exchangeRate: Double { get set }
+}
+
 class ConversionCell: UITableViewCell {
     @IBOutlet weak var textField: UITextField!
+    
+    weak var delegate: ExchangeRateDelegate?
+    var previousValue: Double = 1.0
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -17,12 +24,21 @@ class ConversionCell: UITableViewCell {
         textField.delegate = self
         textField.keyboardType = .decimalPad
         textField.addDoneCancelToolbar()
+                
+        setExchangeRate()
     }
     
     static var identifier: String {
         return String(describing: self)
     }
     
+    func setExchangeRate() {
+        if let exchangeRateString = textField.text, let exchangeRate = Double(exchangeRateString) {
+            delegate?.exchangeRate = exchangeRate
+        } else {
+            textField.text = "\(previousValue)"
+        }
+    }
 }
 
 // MARK: - Text Field Delegate
@@ -35,4 +51,15 @@ extension ConversionCell: UITextFieldDelegate {
         textField.toolBarDoneButton(isEnabled: (newText.length > 0))
         return true
     }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        previousValue = Double(textField.text!)!
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        setExchangeRate()
+    }
 }
+
+

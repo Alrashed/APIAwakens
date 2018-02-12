@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, ExchangeRateDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -17,7 +17,12 @@ class DetailViewController: UIViewController {
     
     var isConversionCellHidden = true
     var selectedPickerRow: Int = 0
-    var exchangeRate: Double = 1.0
+    var exchangeRate: Double = 1.0 {
+        didSet {
+            tableView.reloadData()
+            hideConverionCell()
+        }
+    }
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,6 +103,7 @@ extension DetailViewController: UITableViewDataSource {
                     cell.valueLabel.text = item.homeworld
                 case 2:
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: ConversionCell.identifier) as? ConversionCell else { return UITableViewCell() }
+                    cell.delegate = self
                     return cell
                 case 3:
                     cell.keyLabel.text = Character.Keys.height.description
@@ -125,6 +131,7 @@ extension DetailViewController: UITableViewDataSource {
                     cell.conversionButtonHanlder = conversionButtonTapHandler()
                 case 2:
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: ConversionCell.identifier) as? ConversionCell else { return UITableViewCell() }
+                    cell.delegate = self
                     return cell
                 case 3:
                     cell.keyLabel.text = Vehicle.Keys.length.description
@@ -152,6 +159,7 @@ extension DetailViewController: UITableViewDataSource {
                     cell.conversionButtonHanlder = conversionButtonTapHandler()
                 case 2:
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: ConversionCell.identifier) as? ConversionCell else { return UITableViewCell() }
+                    cell.delegate = self
                     return cell
                 case 3:
                     cell.keyLabel.text = Starship.Keys.length.description
