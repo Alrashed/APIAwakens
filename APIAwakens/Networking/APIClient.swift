@@ -1,0 +1,74 @@
+//
+//  APIClient.swift
+//  APIAwakens
+//
+//  Created by Khalid Alrashed on 2/17/18.
+//  Copyright © 2018 Khalid Alrashed. All rights reserved.
+//
+
+import Foundation
+
+enum Result<T, U> where U: Error {
+    case success(T)
+    case failure(U)
+}
+
+protocol APIClient {
+    var session: URLSession { get }
+    func fetch<T: Decodable>(with request: URLRequest, decode: @escaping (Decodable) -> T?, completion: @escaping (Result<T, NetworkingError>) -> Void)
+}
+
+extension APIClient {
+    typealias JSONTaskCompletionHandler = (Decodable?, NetworkingError?) -> Void
+    
+    private func decodingTask<T: Decodable>(with request: URLRequest, decodingType: T.Type, completionHandler completion: @escaping JSONTaskCompletionHandler) -> URLSessionDataTask {
+        
+        let task = session.dataTask(with: request) { data, response, error in
+            guard let httpResponse = response as? HTTPURLResponse else {
+                completion(nil, .requestFailed)
+                return
+            }
+            
+            if httpResponse.statusCode == 200 {
+                if let data = data {
+                    do {
+                        let genericModel = try JSONDecoder().decode(decodingType, from: data)
+                        completion(genericModel, nil)
+                    } catch {
+                        completion(nil, .jsonConversionFailure)
+                    }
+                } else {
+                    completion(nil, .invalidData)
+                }
+            } else {
+                completion(nil, .responseUnsuccessful)
+            }
+        }
+        
+        return task
+    }
+    
+    func fetch<T: Decodable>(with request: URLRequest, decode: @escaping (Decodable) -> T?, completion: @escaping (Result<T, NetworkingError>) -> Void) {
+        let task = decodingTask(with: request, decodingType: T.self) { (json, error) in
+            
+            DispatchQueue.main.async {
+                guard let json = json else {
+                    if let error = error {
+                        completion(Result.failure(error))
+                    } else {
+                        completion(Result.failure(.invalidData))
+                    }
+                    return
+                }
+                
+                if let value = decode(json) {
+                    completion(.success(value))
+                } else {
+                    completion(.failure(.jsonParsingFailure))
+                }
+            }
+        }
+        
+        task.resume()
+    }
+}
