@@ -7,8 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E903B2A12038BE85009484F3 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E903B2A02038BE85009484F3 /* Endpoint.swift */; };
+		E903B2A32038BF0E009484F3 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E903B2A22038BF0E009484F3 /* APIClient.swift */; };
+		E903B2A5203911D2009484F3 /* EntityWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E903B2A4203911D2009484F3 /* EntityWrapper.swift */; };
+		E903B2A72039134C009484F3 /* SWAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E903B2A62039134C009484F3 /* SWAPIClient.swift */; };
 		E905B0841F88339500C2B512 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E905B0831F88339500C2B512 /* DetailViewController.swift */; };
 		E905B0861F883B2000C2B512 /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E905B0851F883B2000C2B512 /* InfoCell.swift */; };
+		E91BC33720407AD400341966 /* NetworkingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91BC33620407AD400341966 /* NetworkingError.swift */; };
 		E95565AF1F956BDC00D8436E /* ConversionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95565AE1F956BDC00D8436E /* ConversionCell.swift */; };
 		E95C7E981F82E84400954620 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C7E971F82E84400954620 /* AppDelegate.swift */; };
 		E95C7E9A1F82E84400954620 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C7E991F82E84400954620 /* ViewController.swift */; };
@@ -24,8 +29,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E903B2A02038BE85009484F3 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		E903B2A22038BF0E009484F3 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		E903B2A4203911D2009484F3 /* EntityWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityWrapper.swift; sourceTree = "<group>"; };
+		E903B2A62039134C009484F3 /* SWAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWAPIClient.swift; sourceTree = "<group>"; };
 		E905B0831F88339500C2B512 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		E905B0851F883B2000C2B512 /* InfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
+		E91BC33620407AD400341966 /* NetworkingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingError.swift; sourceTree = "<group>"; };
 		E95565AE1F956BDC00D8436E /* ConversionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionCell.swift; sourceTree = "<group>"; };
 		E95C7E941F82E84400954620 /* APIAwakens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = APIAwakens.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E95C7E971F82E84400954620 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +63,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E903B29F2038BE71009484F3 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				E903B2A02038BE85009484F3 /* Endpoint.swift */,
+				E91BC33620407AD400341966 /* NetworkingError.swift */,
+				E903B2A22038BF0E009484F3 /* APIClient.swift */,
+				E903B2A62039134C009484F3 /* SWAPIClient.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		E9574AC91FA2F16700C9647F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				E9574AC91FA2F16700C9647F /* Extensions */,
+				E903B29F2038BE71009484F3 /* Networking */,
 				E95C7EAB1F843E1200954620 /* Controllers */,
 				E95C7EAA1F843E0B00954620 /* Views */,
 				E95C7EA91F843E0500954620 /* Models */,
@@ -97,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				E9FF6EC81F92DDDB000FA6FA /* Entity.swift */,
+				E903B2A4203911D2009484F3 /* EntityWrapper.swift */,
 				E95C7EAC1F843E4200954620 /* Character.swift */,
 				E95C7EAE1F843F1800954620 /* Vehicle.swift */,
 				E95C7EB01F843FBE00954620 /* Starship.swift */,
@@ -197,14 +220,19 @@
 			files = (
 				E95C7EAF1F843F1800954620 /* Vehicle.swift in Sources */,
 				E95C7EB11F843FBE00954620 /* Starship.swift in Sources */,
+				E91BC33720407AD400341966 /* NetworkingError.swift in Sources */,
 				E9D3B64B2031FDEB00C51769 /* UITextField+AddDoneCancelToolBar.swift in Sources */,
 				E95C7E9A1F82E84400954620 /* ViewController.swift in Sources */,
+				E903B2A72039134C009484F3 /* SWAPIClient.swift in Sources */,
 				E9FF6EC71F8F10AD000FA6FA /* Stub.swift in Sources */,
 				E905B0841F88339500C2B512 /* DetailViewController.swift in Sources */,
+				E903B2A5203911D2009484F3 /* EntityWrapper.swift in Sources */,
 				E9FF6EC91F92DDDB000FA6FA /* Entity.swift in Sources */,
 				E95C7EAD1F843E4200954620 /* Character.swift in Sources */,
 				E95C7E981F82E84400954620 /* AppDelegate.swift in Sources */,
+				E903B2A32038BF0E009484F3 /* APIClient.swift in Sources */,
 				E905B0861F883B2000C2B512 /* InfoCell.swift in Sources */,
+				E903B2A12038BE85009484F3 /* Endpoint.swift in Sources */,
 				E95565AF1F956BDC00D8436E /* ConversionCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
