@@ -30,3 +30,10 @@ struct Character: Entity {
         case hair = "hair_color"
     }
 }
+
+struct CharacterWrapper: Decodable {
+    var results: [Character]
+    var count: Int
+    var next: String?
+    var previous: String?
+}

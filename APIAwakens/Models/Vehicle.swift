@@ -30,3 +30,10 @@ struct Vehicle: Entity {
         case crew
     }
 }
+
+struct VehicleWrapper: Decodable {
+    var results: [Vehicle]
+    var count: Int
+    var next: String?
+    var previous: String?
+}

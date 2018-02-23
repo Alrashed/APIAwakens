@@ -30,3 +30,10 @@ struct Starship: Entity {
         case crew
     }
 }
+
+struct StarshipWrapper: Decodable {
+    var results: [Starship]
+    var count: Int
+    var next: String?
+    var previous: String?
+}
