@@ -8,13 +8,13 @@
 
 import Foundation
 
-enum EntityType: String {
-    case Characters
-    case Vehicles
-    case Starships
+enum EntityType: String, Decodable {
+    case characters
+    case vehicles
+    case starships
 }
 
-protocol Entity {
+protocol Entity: Decodable {
     var name: String { get }
     var rowCount: Int { get }
     var type: EntityType { get }
