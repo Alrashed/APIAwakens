@@ -20,7 +20,7 @@ class SWAPIClient: APIClient {
     }
     
     
-    // MARK:- Characters
+    // MARK: - Characters
     
     func fetchCharacters(completion: @escaping (Result<CharacterWrapper?, NetworkingError>) -> Void) {
         let characterRequest = EntityType.characters.request
@@ -75,8 +75,8 @@ class SWAPIClient: APIClient {
         }
     }
     
-    
-    // MARK:- Vehicles
+
+    // MARK: - Vehicles
     
     func fetchVehicles(completion: @escaping (Result<VehicleWrapper?, NetworkingError>) -> Void) {
         let vehicleRequest = EntityType.vehicles.request
@@ -132,10 +132,10 @@ class SWAPIClient: APIClient {
     }
     
     
-    // MARK:- Starships
+    // MARK: - Starships
     
     func fetchStarships(completion: @escaping (Result<StarshipWrapper?, NetworkingError>) -> Void) {
-        let vehicleRequest = EntityType.vehicles.request
+        let vehicleRequest = EntityType.starships.request
         fetch(with: vehicleRequest, decode: { json in
             guard var starshipWrapper = json as? StarshipWrapper else { return nil }
             self.fetchAllStarships(from: starshipWrapper, completion: { (result) in

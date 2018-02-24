@@ -21,7 +21,7 @@ struct Vehicle: Entity {
     let `class`: String
     let crew: String
     
-    enum CodkingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case name
         case make = "manufacturer"
         case cost = "cost_in_credits"
