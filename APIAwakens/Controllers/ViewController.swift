@@ -34,13 +34,13 @@ class ViewController: UIViewController {
         let detailViewController = segue.destination as! DetailViewController
         
         if segue.identifier == SegueIdentifiers.showCharacters {
-            detailViewController.entityItems = Stub.characters
+            detailViewController.pickedEntityType = .characters
             
         } else if segue.identifier == SegueIdentifiers.showVehicles {
-            detailViewController.entityItems = Stub.vehicles
+            detailViewController.pickedEntityType = .vehicles
             
         } else if segue.identifier == SegueIdentifiers.showStarships {
-            detailViewController.entityItems = Stub.starships
+            detailViewController.pickedEntityType = .starships
         }
     }
 }

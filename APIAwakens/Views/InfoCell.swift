@@ -25,6 +25,8 @@ class InfoCell:  UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        keyLabel.text = ""
+        valueLabel.text = ""
     }
     
     static var identifier: String {
@@ -104,5 +106,38 @@ class InfoCell:  UITableViewCell {
         
         return credits
     }
+    
+    //    @IBAction func conversionButtonTapped(_ sender: UIButton) {
+    //        if sender.currentTitle == "Credits" || sender.currentTitle == "Metric" {
+    //            if !sender.isSelected {
+    //                sender.isSelected = true
+    //                leftConversionButton.isSelected = false
+    //
+    //                if sender.currentTitle == "English", let length = length {
+    //                    valueLabel.text = convertMetricToEnglish(metric: length)
+    //                }
+    //                else if sender.currentTitle == "USD",let cost = cost, let exchangeRate = exchangeRate {
+    //                    valueLabel.text = convertCreditsToUSD(credits: cost, exchangeRate: exchangeRate)
+    //                }
+    //
+    //                conversionButtonHanlder?(self, sender)
+    //            }
+    //        }
+    //        else if sender.currentTitle == "USD" || sender.currentTitle == "English" {
+    //            if !sender.isSelected {
+    //                sender.isSelected = true
+    //                rightConversionButton.isSelected = false
+    //
+    //                if sender.currentTitle == "Metric", let length = length {
+    //                    valueLabel.text = length
+    //                }
+    //                else if sender.currentTitle == "Credits", let cost = cost {
+    //                    valueLabel.text = cost
+    //                }
+    //
+    //                conversionButtonHanlder?(self, sender)
+    //            }
+    //        }
+    //    }
 }
 

@@ -13,7 +13,15 @@ class DetailViewController: UIViewController, ExchangeRateDelegate {
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var nameLabel: UILabel!
     
-    var entityItems: [Entity]?
+    let client = SWAPIClient()
+    var pickedEntityType: EntityType!
+    var entities: [Entity]? {
+        didSet {
+            tableView.reloadData()
+            pickerView.reloadAllComponents()
+            nameLabel.text = entities![selectedPickerRow].name
+        }
+    }
     
     var isConversionCellHidden = true
     var selectedPickerRow: Int = 0
@@ -27,6 +35,8 @@ class DetailViewController: UIViewController, ExchangeRateDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        nameLabel.text = ""
+        
         pickerView.dataSource = self
         pickerView.delegate = self
         
@@ -35,11 +45,52 @@ class DetailViewController: UIViewController, ExchangeRateDelegate {
         
         tableView.isScrollEnabled = false
         tableView.tableFooterView = UIView()
-        self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
         
-        if let entityItems = entityItems {
-            nameLabel.text = entityItems[selectedPickerRow].name
-            self.title = entityItems[selectedPickerRow].type.rawValue
+        self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
+        self.title = pickedEntityType.rawValue.capitalized
+        
+        fetchEntities()
+    }
+    
+    func fetchEntities() {
+        switch pickedEntityType {
+        case .characters:
+            client.fetchCharacters(completion: { (result) in
+                switch result {
+                case .success(let wrapper):
+                    if let wrapper = wrapper, wrapper.results.count == wrapper.count {
+                        self.entities = wrapper.results
+                    }
+                case .failure(let error):
+                    print(error)
+                }
+            })
+            
+        case .vehicles:
+            client.fetchVehicles(completion: { (result) in
+                switch result {
+                case .success(let wrapper):
+                    if let wrapper = wrapper, wrapper.results.count == wrapper.count {
+                        self.entities = wrapper.results
+                    }
+                case .failure(let error):
+                    print(error)
+                }
+            })
+            
+        case .starships:
+            client.fetchStarships(completion: { (result) in
+                switch result {
+                case .success(let wrapper):
+                    if let wrapper = wrapper, wrapper.results.count == wrapper.count {
+                        self.entities = wrapper.results
+                    }
+                case .failure(let error):
+                    print(error)
+                }
+            })
+            
+        default: break
         }
     }
     
@@ -55,7 +106,7 @@ class DetailViewController: UIViewController, ExchangeRateDelegate {
         tableView.endUpdates()
     }
     
-    @objc func hideConverionCell() {
+    func hideConverionCell() {
         isConversionCellHidden = true
         
         tableView.beginUpdates()
@@ -82,51 +133,56 @@ class DetailViewController: UIViewController, ExchangeRateDelegate {
 
 extension DetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let entityItemsCount = entityItems?[section].rowCount else { fatalError() }
-        return entityItemsCount
+        return 6
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: InfoCell.identifier, for: indexPath) as? InfoCell, let entityItems = entityItems else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: InfoCell.identifier) as? InfoCell, let entities = entities else {
+            let cell = UITableViewCell()
+            cell.backgroundColor = UIColor(red: 27/255, green: 32/255, blue: 36/255, alpha: 1)
+            return cell
+            
+        }
         
-        let item = entityItems[selectedPickerRow]
+        let entity = entities[selectedPickerRow]
         
-        switch item.type {
-        case .Characters:
-            if let item = item as? Character {
+        switch pickedEntityType {
+            
+        case .characters:
+            if let entity = entity as? Character {
                 switch indexPath.row {
                 case 0:
-                    cell.keyLabel.text = Character.Keys.birth_year.description
-                    cell.valueLabel.text = item.birthYear
+                    cell.keyLabel.text = "Born"
+                    cell.valueLabel.text = entity.born
                 case 1:
-                    cell.keyLabel.text = Character.Keys.homeworld.description
-                    cell.valueLabel.text = item.homeworld
+                    cell.keyLabel.text = "Home"
+                    cell.valueLabel.text = "unknown"
                 case 2:
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: ConversionCell.identifier) as? ConversionCell else { return UITableViewCell() }
                     cell.delegate = self
                     return cell
                 case 3:
-                    cell.keyLabel.text = Character.Keys.height.description
-                    cell.length = item.height
+                    cell.keyLabel.text = "Height"
+                    cell.length = entity.height
                 case 4:
-                    cell.keyLabel.text = Character.Keys.eye_color.description
-                    cell.valueLabel.text = item.eyeColor
+                    cell.keyLabel.text = "Eyes"
+                    cell.valueLabel.text = entity.eyes
                 case 5:
-                    cell.keyLabel.text = Character.Keys.hair_color.description
-                    cell.valueLabel.text = item.hairColor
+                    cell.keyLabel.text = "Hair"
+                    cell.valueLabel.text = entity.hair
                 default: break
                 }
             }
             
-        case .Vehicles:
-            if let item = item as? Vehicle {
+        case .vehicles:
+            if let entity = entity as? Vehicle {
                 switch indexPath.row {
                 case 0:
-                    cell.keyLabel.text = Vehicle.Keys.manufacturer.description
-                    cell.valueLabel.text = item.manufacturer
+                    cell.keyLabel.text = "Make"
+                    cell.valueLabel.text = entity.make
                 case 1:
-                    cell.keyLabel.text = Vehicle.Keys.cost_in_credits.description
-                    cell.cost = item.costInCredits
+                    cell.keyLabel.text = "Cost"
+                    cell.cost = entity.cost
                     cell.exchangeRate = exchangeRate
                     cell.conversionButtonHanlder = conversionButtonTapHandler()
                 case 2:
@@ -134,27 +190,27 @@ extension DetailViewController: UITableViewDataSource {
                     cell.delegate = self
                     return cell
                 case 3:
-                    cell.keyLabel.text = Vehicle.Keys.length.description
-                    cell.length = item.length
+                    cell.keyLabel.text = "Length"
+                    cell.length = entity.length
                 case 4:
-                    cell.keyLabel.text = Vehicle.Keys.vehicle_class.description
-                    cell.valueLabel.text = item.vehicleClass
+                    cell.keyLabel.text = "Class"
+                    cell.valueLabel.text = entity.class
                 case 5:
-                    cell.keyLabel.text = Vehicle.Keys.crew.description
-                    cell.valueLabel.text = item.crew
+                    cell.keyLabel.text = "Crew"
+                    cell.valueLabel.text = entity.crew
                 default: break
                 }
             }
             
-        case .Starships:
-            if let item = item as? Starship {
+        case .starships:
+            if let entity = entity as? Starship {
                 switch indexPath.row {
                 case 0:
-                    cell.keyLabel.text = Starship.Keys.manufacturer.description
-                    cell.valueLabel.text = item.manufacturer
+                    cell.keyLabel.text = "Make"
+                    cell.valueLabel.text = entity.make
                 case 1:
-                    cell.keyLabel.text = Starship.Keys.cost_in_credits.description
-                    cell.cost = item.costInCredits
+                    cell.keyLabel.text = "Cost"
+                    cell.cost = entity.cost
                     cell.exchangeRate = exchangeRate
                     cell.conversionButtonHanlder = conversionButtonTapHandler()
                 case 2:
@@ -162,17 +218,19 @@ extension DetailViewController: UITableViewDataSource {
                     cell.delegate = self
                     return cell
                 case 3:
-                    cell.keyLabel.text = Starship.Keys.length.description
-                    cell.length = item.length
+                    cell.keyLabel.text = "Length"
+                    cell.length = entity.length
                 case 4:
-                    cell.keyLabel.text = Starship.Keys.starship_class.description
-                    cell.valueLabel.text = item.starshipClass
+                    cell.keyLabel.text = "Class"
+                    cell.valueLabel.text = entity.class
                 case 5:
-                    cell.keyLabel.text = Starship.Keys.crew.description
-                    cell.valueLabel.text = item.crew
+                    cell.keyLabel.text = "Crew"
+                    cell.valueLabel.text = entity.crew
                 default: break
                 }
             }
+            
+        default: break
         }
         return cell
     }
@@ -200,8 +258,8 @@ extension DetailViewController: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        guard let entityItems = entityItems else { fatalError() }
-        return entityItems.count
+        guard let entities = entities else { return 0 }
+        return entities.count
     }
 }
 
@@ -209,13 +267,13 @@ extension DetailViewController: UIPickerViewDataSource {
 
 extension DetailViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        guard let entityItems = entityItems else { fatalError() }
-        return entityItems[row].name
+        guard let entities = entities else { return nil }
+        return entities[row].name
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedPickerRow = row
-        nameLabel.text = entityItems![selectedPickerRow].name
+        nameLabel.text = entities![selectedPickerRow].name
         tableView.reloadData()
     }
 }
