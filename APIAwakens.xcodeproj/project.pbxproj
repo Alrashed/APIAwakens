@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		E903B2A12038BE85009484F3 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E903B2A02038BE85009484F3 /* Endpoint.swift */; };
 		E903B2A32038BF0E009484F3 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E903B2A22038BF0E009484F3 /* APIClient.swift */; };
-		E903B2A5203911D2009484F3 /* EntityWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E903B2A4203911D2009484F3 /* EntityWrapper.swift */; };
 		E903B2A72039134C009484F3 /* SWAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E903B2A62039134C009484F3 /* SWAPIClient.swift */; };
 		E905B0841F88339500C2B512 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E905B0831F88339500C2B512 /* DetailViewController.swift */; };
 		E905B0861F883B2000C2B512 /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E905B0851F883B2000C2B512 /* InfoCell.swift */; };
@@ -23,6 +22,7 @@
 		E95C7EAD1F843E4200954620 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C7EAC1F843E4200954620 /* Character.swift */; };
 		E95C7EAF1F843F1800954620 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C7EAE1F843F1800954620 /* Vehicle.swift */; };
 		E95C7EB11F843FBE00954620 /* Starship.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95C7EB01F843FBE00954620 /* Starship.swift */; };
+		E95D6DF02041E29600570E6A /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95D6DEF2041E29600570E6A /* Planet.swift */; };
 		E9D3B64B2031FDEB00C51769 /* UITextField+AddDoneCancelToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D3B64A2031FDEB00C51769 /* UITextField+AddDoneCancelToolBar.swift */; };
 		E9FF6EC71F8F10AD000FA6FA /* Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FF6EC61F8F10AD000FA6FA /* Stub.swift */; };
 		E9FF6EC91F92DDDB000FA6FA /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FF6EC81F92DDDB000FA6FA /* Entity.swift */; };
@@ -31,7 +31,6 @@
 /* Begin PBXFileReference section */
 		E903B2A02038BE85009484F3 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		E903B2A22038BF0E009484F3 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
-		E903B2A4203911D2009484F3 /* EntityWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityWrapper.swift; sourceTree = "<group>"; };
 		E903B2A62039134C009484F3 /* SWAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWAPIClient.swift; sourceTree = "<group>"; };
 		E905B0831F88339500C2B512 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		E905B0851F883B2000C2B512 /* InfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
@@ -47,6 +46,7 @@
 		E95C7EAC1F843E4200954620 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		E95C7EAE1F843F1800954620 /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
 		E95C7EB01F843FBE00954620 /* Starship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Starship.swift; sourceTree = "<group>"; };
+		E95D6DEF2041E29600570E6A /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
 		E9D3B64A2031FDEB00C51769 /* UITextField+AddDoneCancelToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+AddDoneCancelToolBar.swift"; sourceTree = "<group>"; };
 		E9FF6EC61F8F10AD000FA6FA /* Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stub.swift; sourceTree = "<group>"; };
 		E9FF6EC81F92DDDB000FA6FA /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
@@ -119,10 +119,10 @@
 			isa = PBXGroup;
 			children = (
 				E9FF6EC81F92DDDB000FA6FA /* Entity.swift */,
-				E903B2A4203911D2009484F3 /* EntityWrapper.swift */,
 				E95C7EAC1F843E4200954620 /* Character.swift */,
 				E95C7EAE1F843F1800954620 /* Vehicle.swift */,
 				E95C7EB01F843FBE00954620 /* Starship.swift */,
+				E95D6DEF2041E29600570E6A /* Planet.swift */,
 				E9FF6EC61F8F10AD000FA6FA /* Stub.swift */,
 			);
 			path = Models;
@@ -226,7 +226,7 @@
 				E903B2A72039134C009484F3 /* SWAPIClient.swift in Sources */,
 				E9FF6EC71F8F10AD000FA6FA /* Stub.swift in Sources */,
 				E905B0841F88339500C2B512 /* DetailViewController.swift in Sources */,
-				E903B2A5203911D2009484F3 /* EntityWrapper.swift in Sources */,
+				E95D6DF02041E29600570E6A /* Planet.swift in Sources */,
 				E9FF6EC91F92DDDB000FA6FA /* Entity.swift in Sources */,
 				E95C7EAD1F843E4200954620 /* Character.swift in Sources */,
 				E95C7E981F82E84400954620 /* AppDelegate.swift in Sources */,

@@ -12,16 +12,11 @@ enum EntityType: String, Decodable {
     case characters
     case vehicles
     case starships
+    case planets
 }
 
 protocol Entity: Decodable {
     var name: String { get }
-    var rowCount: Int { get }
     var type: EntityType { get }
 }
 
-extension Entity {
-    var rowCount: Int {
-        return 6
-    }
-}
