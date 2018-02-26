@@ -39,7 +39,7 @@ class SWAPIClient: APIClient {
         }, completion: completion)
     }
     
-    func fetchMoreCharacters(_ wrapper: CharacterWrapper, completion: @escaping (Result<CharacterWrapper?, NetworkingError>) -> Void) {
+    private func fetchMoreCharacters(_ wrapper: CharacterWrapper, completion: @escaping (Result<CharacterWrapper?, NetworkingError>) -> Void) {
         guard let nextURL = wrapper.next, let url = URL(string: nextURL) else { return }
         let request = URLRequest(url: url)
         fetch(with: request, decode: { json in
@@ -48,7 +48,7 @@ class SWAPIClient: APIClient {
         }, completion: completion)
     }
     
-    func fetchAllCharacters(from wrapper: CharacterWrapper, completion: @escaping (Result<CharacterWrapper?, NetworkingError>) -> Void) {
+    private func fetchAllCharacters(from wrapper: CharacterWrapper, completion: @escaping (Result<CharacterWrapper?, NetworkingError>) -> Void) {
         var characterWrapper = wrapper
         var characters: [Character] = characterWrapper.results
         
@@ -95,7 +95,7 @@ class SWAPIClient: APIClient {
         }, completion: completion)
     }
     
-    func fetchMoreVehicles(_ wrapper: VehicleWrapper, completion: @escaping (Result<VehicleWrapper?, NetworkingError>) -> Void) {
+    private func fetchMoreVehicles(_ wrapper: VehicleWrapper, completion: @escaping (Result<VehicleWrapper?, NetworkingError>) -> Void) {
         guard let nextURL = wrapper.next, let url = URL(string: nextURL) else { return }
         let request = URLRequest(url: url)
         fetch(with: request, decode: { json in
@@ -104,7 +104,7 @@ class SWAPIClient: APIClient {
         }, completion: completion)
     }
     
-    func fetchAllVehicles(from wrapper: VehicleWrapper, completion: @escaping (Result<VehicleWrapper?, NetworkingError>) -> Void) {
+    private func fetchAllVehicles(from wrapper: VehicleWrapper, completion: @escaping (Result<VehicleWrapper?, NetworkingError>) -> Void) {
         var vehicleWrapper = wrapper
         var vehicles: [Vehicle] = vehicleWrapper.results
         
@@ -151,7 +151,7 @@ class SWAPIClient: APIClient {
         }, completion: completion)
     }
     
-    func fetchMoreStarships(_ wrapper: StarshipWrapper, completion: @escaping (Result<StarshipWrapper?, NetworkingError>) -> Void) {
+    private func fetchMoreStarships(_ wrapper: StarshipWrapper, completion: @escaping (Result<StarshipWrapper?, NetworkingError>) -> Void) {
         guard let nextURL = wrapper.next, let url = URL(string: nextURL) else { return }
         let request = URLRequest(url: url)
         fetch(with: request, decode: { json in
@@ -160,7 +160,7 @@ class SWAPIClient: APIClient {
         }, completion: completion)
     }
     
-    func fetchAllStarships(from wrapper: StarshipWrapper, completion: @escaping (Result<StarshipWrapper?, NetworkingError>) -> Void) {
+    private func fetchAllStarships(from wrapper: StarshipWrapper, completion: @escaping (Result<StarshipWrapper?, NetworkingError>) -> Void) {
         var starshipWrapper = wrapper
         var starships: [Starship] = starshipWrapper.results
         
@@ -185,6 +185,19 @@ class SWAPIClient: APIClient {
                 }
             })
         }
+    }
+    
+    // MARK: - Planets
+    
+    func fetchHomePlanet(for character: Character, completion: @escaping (Result<Planet?, NetworkingError>) -> Void) {
+        let planetURL = character.home
+        guard let url = URL(string: planetURL) else { return }
+        let planetRequest = URLRequest(url: url)
+        
+        fetch(with: planetRequest, decode: { (json) in
+            guard let planet = json as? Planet else { return nil }
+            return planet
+        }, completion: completion)
     }
 }
 

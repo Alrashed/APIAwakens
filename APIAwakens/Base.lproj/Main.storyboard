@@ -158,8 +158,8 @@
                                                     <color key="textColor" red="0.48116332290000002" green="0.80791956190000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CLs-eQ-s3Z">
-                                                    <rect key="frame" x="100" y="7" width="51" height="24"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CLs-eQ-s3Z">
+                                                    <rect key="frame" x="100" y="7" width="260" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                     <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -203,6 +203,7 @@
                                                 <constraint firstItem="fiN-CC-DEu" firstAttribute="centerY" secondItem="qvK-gX-bAH" secondAttribute="centerY" id="2NM-hG-Veu"/>
                                                 <constraint firstItem="CLs-eQ-s3Z" firstAttribute="leading" secondItem="qvK-gX-bAH" secondAttribute="leading" constant="100" id="3Gc-n8-hYE"/>
                                                 <constraint firstItem="fiN-CC-DEu" firstAttribute="leading" secondItem="qvK-gX-bAH" secondAttribute="leading" constant="15" id="BTv-Ry-zm8"/>
+                                                <constraint firstAttribute="trailing" secondItem="CLs-eQ-s3Z" secondAttribute="trailing" constant="15" id="DrE-8F-dCG"/>
                                                 <constraint firstItem="F83-LW-3GI" firstAttribute="centerY" secondItem="qvK-gX-bAH" secondAttribute="centerY" id="Kka-we-wdj"/>
                                                 <constraint firstItem="JLv-97-0k3" firstAttribute="centerY" secondItem="qvK-gX-bAH" secondAttribute="centerY" id="MT2-QA-OH3"/>
                                                 <constraint firstAttribute="trailing" secondItem="F83-LW-3GI" secondAttribute="trailing" constant="15" id="dkj-qE-YDY"/>

@@ -36,6 +36,7 @@ extension EntityType: Endpoint {
         case .characters: return "/api/people/"
         case .vehicles: return "/api/vehicles/"
         case .starships: return "/api/starships/"
+        case .planets: return "/api/planets/"
         }
     }
 }

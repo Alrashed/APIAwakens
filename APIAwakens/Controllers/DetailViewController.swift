@@ -93,6 +93,7 @@ class DetailViewController: UIViewController, ExchangeRateDelegate {
         default: break
         }
     }
+
     
     func showConversionCell() {
         if isConversionCellHidden {
@@ -156,7 +157,14 @@ extension DetailViewController: UITableViewDataSource {
                     cell.valueLabel.text = entity.born
                 case 1:
                     cell.keyLabel.text = "Home"
-                    cell.valueLabel.text = "unknown"
+                    cell.valueLabel.text = ""
+                    client.fetchHomePlanet(for: entity, completion: { (result) in
+                        if case let .success(planet) = result {
+                            cell.valueLabel.text = planet!.name.capitalized
+                        } else {
+                            cell.valueLabel.text = "unknown"
+                        }
+                    })
                 case 2:
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: ConversionCell.identifier) as? ConversionCell else { return UITableViewCell() }
                     cell.delegate = self
@@ -166,10 +174,10 @@ extension DetailViewController: UITableViewDataSource {
                     cell.length = entity.height
                 case 4:
                     cell.keyLabel.text = "Eyes"
-                    cell.valueLabel.text = entity.eyes
+                    cell.valueLabel.text = entity.eyes.capitalized
                 case 5:
                     cell.keyLabel.text = "Hair"
-                    cell.valueLabel.text = entity.hair
+                    cell.valueLabel.text = entity.hair.capitalized
                 default: break
                 }
             }
