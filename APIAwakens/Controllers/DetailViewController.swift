@@ -62,7 +62,7 @@ class DetailViewController: UIViewController, ExchangeRateDelegate {
                         self.entities = wrapper.results
                     }
                 case .failure(let error):
-                    print(error)
+                    self.showNetowrkAlet(title: "There was an error retrieving \(self.pickedEntityType.rawValue.capitalized) data", message: error.localizedDescription)
                 }
             })
             
@@ -74,7 +74,7 @@ class DetailViewController: UIViewController, ExchangeRateDelegate {
                         self.entities = wrapper.results
                     }
                 case .failure(let error):
-                    print(error)
+                    self.showNetowrkAlet(title: "There was an error retrieving \(self.pickedEntityType.rawValue.capitalized) data", message: error.localizedDescription)
                 }
             })
             
@@ -86,14 +86,25 @@ class DetailViewController: UIViewController, ExchangeRateDelegate {
                         self.entities = wrapper.results
                     }
                 case .failure(let error):
-                    print(error)
+                    self.showNetowrkAlet(title: "There was an error retrieving \(self.pickedEntityType.rawValue.capitalized) data", message: error.localizedDescription)
                 }
             })
             
         default: break
         }
     }
-
+    
+    func showNetowrkAlet(title: String, message: String?) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+            guard let navigationController = self?.navigationController else { return }
+            navigationController.popViewController(animated: true)
+        }
+        alert.addAction(action)
+        
+        present(alert, animated: true, completion: nil)
+    }
     
     func showConversionCell() {
         if isConversionCellHidden {
