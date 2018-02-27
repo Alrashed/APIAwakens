@@ -21,6 +21,10 @@ struct Starship: Entity {
     let `class`: String
     let crew: String
     
+    var size: Double? {
+        return Double(length)
+    }
+    
     enum CodingKeys: String, CodingKey {
         case name
         case make = "manufacturer"

@@ -17,6 +17,6 @@ enum EntityType: String, Decodable {
 
 protocol Entity: Decodable {
     var name: String { get }
+    var size: Double? { get }
     var type: EntityType { get }
 }
-

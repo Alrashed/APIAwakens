@@ -15,4 +15,9 @@ struct Planet: Entity {
     }
     
     let name: String
+    let diameter: String
+    
+    var size: Double? {
+        return Double(diameter)
+    }
 }

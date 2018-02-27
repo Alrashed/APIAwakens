@@ -12,6 +12,8 @@ class DetailViewController: UIViewController, ExchangeRateDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var smallestLabel: UILabel!
+    @IBOutlet weak var largestLabel: UILabel!
     
     let client = SWAPIClient()
     var pickedEntityType: EntityType!
@@ -20,6 +22,13 @@ class DetailViewController: UIViewController, ExchangeRateDelegate {
             tableView.reloadData()
             pickerView.reloadAllComponents()
             nameLabel.text = entities![selectedPickerRow].name
+            
+            let entitiesWithSizes = entities?.filter({ $0.size != nil })
+            let largestEntity = entitiesWithSizes?.max(by: { $0.size! < $1.size! })
+            let smallestEntity = entitiesWithSizes?.min(by: { $0.size! < $1.size! })
+            
+            largestLabel.text = largestEntity?.name
+            smallestLabel.text = smallestEntity?.name
         }
     }
     
@@ -36,6 +45,8 @@ class DetailViewController: UIViewController, ExchangeRateDelegate {
         super.viewDidLoad()
         
         nameLabel.text = ""
+        smallestLabel.text = ""
+        largestLabel.text = ""
         
         pickerView.dataSource = self
         pickerView.delegate = self
@@ -182,7 +193,7 @@ extension DetailViewController: UITableViewDataSource {
                     return cell
                 case 3:
                     cell.keyLabel.text = "Height"
-                    cell.length = entity.height
+                    cell.length = entity.heightInMeters
                 case 4:
                     cell.keyLabel.text = "Eyes"
                     cell.valueLabel.text = entity.eyes.capitalized

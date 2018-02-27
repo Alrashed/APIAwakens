@@ -21,6 +21,17 @@ struct Character: Entity {
     let eyes: String
     let hair: String
     
+    var heightInMeters: String {
+        if let heightInCentimeters = Double(height) {
+            return "\(heightInCentimeters / 100)"
+        }
+        return height
+    }
+    
+    var size: Double? {
+        return Double(height)
+    }
+    
     enum CodingKeys: String, CodingKey {
         case name
         case born = "birth_year"
