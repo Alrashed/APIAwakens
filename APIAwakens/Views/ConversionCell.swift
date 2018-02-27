@@ -8,6 +8,19 @@
 
 import UIKit
 
+extension UIView {
+    var parentViewController: UIViewController? {
+        var parentResponder: UIResponder? = self
+        while parentResponder != nil {
+            parentResponder = parentResponder!.next
+            if parentResponder is UIViewController {
+                return parentResponder as! UIViewController!
+            }
+        }
+        return nil
+    }
+}
+
 protocol ExchangeRateDelegate: class {
     var exchangeRate: Double { get set }
 }
@@ -39,6 +52,14 @@ class ConversionCell: UITableViewCell {
             textField.text = "\(previousValue)"
         }
     }
+    
+    func showTextFieldError() {
+        let alert = UIAlertController(title: "Invalid Exchange Rate", message: "Please enter an exchange rate value bigger than 0", preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(action)
+        
+        self.parentViewController?.present(alert, animated: true, completion: nil)
+    }
 }
 
 // MARK: - Text Field Delegate
@@ -49,6 +70,7 @@ extension ConversionCell: UITextFieldDelegate {
         let newText = oldText.replacingCharacters(in: range, with: string) as NSString
         
         textField.toolBarDoneButton(isEnabled: (newText.length > 0))
+        
         return true
     }
     
@@ -57,9 +79,15 @@ extension ConversionCell: UITextFieldDelegate {
         return true
     }
     
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if let text = textField.text, Double(text)! <= 0 {
+            showTextFieldError()
+            return false
+        }
+        return true
+    }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         setExchangeRate()
     }
 }
-
-
