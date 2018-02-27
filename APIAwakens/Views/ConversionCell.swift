@@ -80,7 +80,7 @@ extension ConversionCell: UITextFieldDelegate {
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        if let text = textField.text, Double(text)! <= 0 {
+        if let text = textField.text, let exchangeRate = Double(text), exchangeRate <= 0 {
             showTextFieldError()
             return false
         }
